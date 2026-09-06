@@ -3,21 +3,119 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Le site de Gabin</title>
+    <title>Bibliothèque Audio</title>
+
+    <style>
+        body {
+            background-color: #15171c;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 45px;
+        }
+
+        p {
+            color: #bbbbbb;
+        }
+
+        .bibliotheque {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .livre {
+            background-color: #252832;
+            width: 180px;
+            height: 260px;
+            border-radius: 15px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: 0.2s;
+        }
+
+        .livre:hover {
+            transform: scale(1.08);
+        }
+
+        .emoji {
+            font-size: 90px;
+        }
+
+        #message {
+            margin-top: 50px;
+            font-size: 20px;
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>Bienvenue sur mon premier site ! 🚀</h1>
+    <h1>📚 Bibliothèque Audio</h1>
 
-    <p>Je suis Gabin et j'apprends à créer des sites Internet.</p>
+    <p>Clique sur un livre pour écouter un audio aléatoire.</p>
 
-    <button onclick="bonjour()">Clique ici</button>
+    <div class="bibliotheque">
+
+        <div class="livre" onclick="lireAudio()">
+            <div class="emoji">📕</div>
+            <h2>Livre 1</h2>
+        </div>
+
+        <div class="livre" onclick="lireAudio()">
+            <div class="emoji">📗</div>
+            <h2>Livre 2</h2>
+        </div>
+
+        <div class="livre" onclick="lireAudio()">
+            <div class="emoji">📘</div>
+            <h2>Livre 3</h2>
+        </div>
+
+    </div>
+
+    <div id="message">
+        🔊 Aucun audio en cours
+    </div>
 
     <script>
-        function bonjour() {
-            alert("Ça marche !!! 😱");
+
+        const phrases = [
+            "Bienvenue dans la bibliothèque de Gabin.",
+            "Ce livre cache peut-être un secret.",
+            "Félicitations, tu as trouvé cet audio.",
+            "Un jour, ce site deviendra peut-être une vraie application.",
+            "Tu viens de sélectionner un audio au hasard."
+        ];
+
+        function lireAudio() {
+
+            const nombreAleatoire =
+                Math.floor(Math.random() * phrases.length);
+
+            const phrase = phrases[nombreAleatoire];
+
+            document.getElementById("message").textContent =
+                "🔊 " + phrase;
+
+            speechSynthesis.cancel();
+
+            const voix = new SpeechSynthesisUtterance(phrase);
+
+            voix.lang = "fr-FR";
+
+            speechSynthesis.speak(voix);
         }
+
     </script>
 
 </body>
