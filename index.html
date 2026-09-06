@@ -2,418 +2,298 @@
 <html lang="fr">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Empêche le navigateur de garder une vieille version -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
 
-    <title>Bookly - Histoires audio</title>
-    <title>Bookly - Histoires audio</title>
+    <title>Bookly</title>
 
     <style>
 
-        * {
-            box-sizing: border-box;
-        }
-
         body {
             margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f7f8fb;
-            color: #171717;
+            background: #f7f7f9;
+            font-family: Arial, sans-serif;
+            color: #202020;
         }
 
-        /* Barre du haut */
 
         header {
-            height: 75px;
             background: white;
+            padding: 22px 8%;
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 0 7%;
+            font-size: 26px;
+            font-weight: bold;
 
             border-bottom: 1px solid #eeeeee;
         }
 
-        .logo {
-            font-size: 25px;
-            font-weight: bold;
-        }
-
-        .logo span {
-            color: #6c5ce7;
-        }
-
-        .profil {
-            width: 42px;
-            height: 42px;
-
-            background: #eeeeff;
-            border-radius: 50%;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            font-size: 20px;
-        }
-
-        /* Partie principale */
 
         main {
-            max-width: 1150px;
+            max-width: 1100px;
             margin: auto;
-            padding: 70px 25px;
+            padding: 60px 20px;
         }
 
-        .hero {
+
+        .titre {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
         }
 
-        .hero h1 {
-            font-size: 52px;
-            margin-bottom: 15px;
+
+        .titre h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
         }
 
-        .hero p {
-            color: #777;
-            font-size: 19px;
+
+        .titre p {
+            color: #777777;
+            font-size: 18px;
         }
 
-        /* Livres */
 
-        .bibliotheque {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
+        .livres {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            flex-wrap: wrap;
         }
+
 
         .livre {
             background: white;
 
-            border-radius: 24px;
+            width: 280px;
 
-            padding: 32px;
+            padding: 18px;
 
-            box-shadow:
-                0 10px 35px rgba(0, 0, 0, 0.06);
+            border-radius: 22px;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 
             cursor: pointer;
 
-            transition:
-                transform 0.25s,
-                box-shadow 0.25s;
+            transition: 0.25s;
         }
+
 
         .livre:hover {
             transform: translateY(-10px);
-
-            box-shadow:
-                0 20px 45px rgba(0, 0, 0, 0.10);
         }
 
-        .couverture {
-            height: 260px;
 
-            border-radius: 18px;
+        .livre img {
+            width: 100%;
+            height: 350px;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            object-fit: cover;
 
-            font-size: 95px;
-
-            margin-bottom: 25px;
+            border-radius: 15px;
         }
 
-        .rouge {
-            background:
-                linear-gradient(135deg, #ff7675, #d63031);
-        }
-
-        .vert {
-            background:
-                linear-gradient(135deg, #55efc4, #00b894);
-        }
-
-        .bleu {
-            background:
-                linear-gradient(135deg, #74b9ff, #0984e3);
-        }
 
         .livre h2 {
-            margin: 0 0 8px;
+            margin-bottom: 5px;
         }
+
 
         .livre p {
-            margin: 0;
-            color: #888;
+            color: #777777;
         }
 
-        /* Zone histoire */
 
         .lecteur {
             background: white;
 
-            margin-top: 55px;
+            margin-top: 50px;
 
-            border-radius: 25px;
+            padding: 30px;
 
-            padding: 35px;
+            border-radius: 22px;
 
-            box-shadow:
-                0 10px 35px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
         }
 
-        .lecteur-haut {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            margin-bottom: 20px;
-        }
-
-        .lecteur h2 {
-            margin: 0;
-        }
-
-        .etat {
-            background: #f0edff;
-            color: #6c5ce7;
-
-            padding: 8px 14px;
-
-            border-radius: 20px;
-
-            font-size: 14px;
-            font-weight: bold;
-        }
 
         #histoire {
-            font-size: 19px;
             line-height: 1.7;
-
-            color: #555;
+            font-size: 18px;
         }
 
-        .boutons {
-            margin-top: 25px;
-
-            display: flex;
-            gap: 12px;
-        }
 
         button {
+            margin-top: 20px;
+
+            background: #202020;
+            color: white;
+
             border: none;
 
             padding: 12px 20px;
 
-            border-radius: 12px;
+            border-radius: 10px;
 
             cursor: pointer;
 
-            font-weight: bold;
             font-size: 15px;
         }
 
-        .stop {
-            background: #eeeeee;
-        }
-
-        .nouvelle {
-            background: #171717;
-            color: white;
-        }
 
         button:hover {
-            opacity: 0.85;
-        }
-
-        /* Téléphone */
-
-        @media (max-width: 800px) {
-
-            .bibliotheque {
-                grid-template-columns: 1fr;
-            }
-
-            .hero h1 {
-                font-size: 38px;
-            }
-
-            header {
-                padding: 0 20px;
-            }
-
+            opacity: 0.8;
         }
 
     </style>
+
 </head>
 
 
 <body>
 
+
 <header>
 
-    <div class="logo">
-        📚 Book<span>ly</span>
-    </div>
-
-    <div class="profil">
-        👤
-    </div>
+    📚 Bookly
 
 </header>
 
 
 <main>
 
-    <section class="hero">
 
-        <h1>
-            Choisis une histoire.
-        </h1>
+    <div class="titre">
+
+        <h1>Choisis ton histoire</h1>
 
         <p>
-            Clique sur un livre et laisse-toi raconter une histoire au hasard.
+            Clique sur un livre et découvre une histoire au hasard.
         </p>
 
-    </section>
+    </div>
 
 
-    <section class="bibliotheque">
+
+    <div class="livres">
+
 
         <div class="livre" onclick="lireHistoire()">
 
-            <div class="couverture rouge">
-                📕
-            </div>
+            <img src="livre1.jpg">
 
-            <h2>Mystères</h2>
+            <h2>Mystère</h2>
 
             <p>
-                Des histoires étranges et mystérieuses.
+                Des histoires mystérieuses...
             </p>
 
         </div>
 
 
+
         <div class="livre" onclick="lireHistoire()">
 
-            <div class="couverture vert">
-                📗
-            </div>
+            <img src="livre2.jpg">
 
-            <h2>Aventures</h2>
+            <h2>Aventure</h2>
 
             <p>
-                Pars découvrir des mondes inconnus.
+                Pars à l'aventure !
             </p>
 
         </div>
 
 
+
         <div class="livre" onclick="lireHistoire()">
 
-            <div class="couverture bleu">
-                📘
-            </div>
+            <img src="livre3.jpg">
 
-            <h2>Histoires</h2>
+            <h2>Fantastique</h2>
 
             <p>
-                Une histoire différente à chaque clic.
+                Découvre des mondes étranges.
             </p>
 
         </div>
 
-    </section>
+
+    </div>
 
 
-    <section class="lecteur">
 
-        <div class="lecteur-haut">
+    <div class="lecteur">
 
-            <h2>🎧 Ton histoire</h2>
-
-            <div class="etat" id="etat">
-                En attente
-            </div>
-
-        </div>
-
+        <h2>🎧 Ton histoire</h2>
 
         <div id="histoire">
-
-            Choisis un livre pour commencer.
-
+            Clique sur un livre pour commencer.
         </div>
 
+        <button onclick="arreter()">
+            ⏹ Arrêter l'audio
+        </button>
 
-        <div class="boutons">
+    </div>
 
-            <button class="stop" onclick="arreterAudio()">
-                ⏹ Arrêter
-            </button>
-
-            <button class="nouvelle" onclick="lireHistoire()">
-                🔀 Nouvelle histoire
-            </button>
-
-        </div>
-
-    </section>
 
 </main>
 
 
+
 <script>
+
 
     const histoires = [
 
-        "Une nuit, Léon découvrit une petite porte derrière une bibliothèque. Il était certain qu'elle n'était pas là la veille. Il l'ouvrit doucement et découvrit un escalier descendant sous sa maison. Tout en bas, une lumière bleue brillait dans l'obscurité.",
+        "Une nuit, Tom découvrit une vieille porte cachée derrière sa bibliothèque. Il l'ouvrit et aperçut un escalier qui descendait sous sa maison. Tout au fond brillait une étrange lumière bleue.",
 
-        "Emma se promenait dans la forêt lorsqu'elle entendit une cloche. Pourtant, aucune maison ne se trouvait à plusieurs kilomètres. Elle suivit le bruit jusqu'à un immense arbre. Dans son tronc se trouvait une porte minuscule.",
+        "Emma marchait dans une forêt lorsqu'elle entendit une cloche. Elle suivit le bruit jusqu'à un arbre immense. Une minuscule porte était cachée dans son tronc.",
 
-        "Lorsque Hugo se réveilla, sa ville était complètement silencieuse. Plus aucune voiture, plus aucun passant. Sur son téléphone, un seul message était affiché : trouve le livre rouge avant minuit.",
+        "Lorsque Hugo se réveilla, toute sa ville était vide. Son téléphone s'alluma soudainement. Un message disait : trouve le livre rouge avant minuit.",
 
-        "Trois amis découvrirent une vieille carte dans le grenier de leur grand-père. Elle indiquait une île qui n'apparaissait sur aucune carte moderne. Au dos, une phrase était écrite : celui qui trouve l'île ne revient jamais tout à fait pareil.",
+        "Trois amis trouvèrent une vieille carte dans le grenier de leur grand-père. Elle indiquait une île qui n'apparaissait sur aucune autre carte.",
 
-        "Dans une petite bibliothèque abandonnée, Zoé trouva un livre sans titre. Lorsqu'elle ouvrit la première page, elle découvrit son propre prénom écrit à l'encre noire. La deuxième page racontait exactement ce qu'elle avait fait le matin même."
+        "Zoé trouva dans une bibliothèque un livre sans titre. Lorsqu'elle l'ouvrit, son propre prénom était écrit sur la première page."
 
     ];
 
 
+
     function lireHistoire() {
 
-        // Arrêter l'histoire précédente
-        window.speechSynthesis.cancel();
 
+        // Choisit un nombre au hasard
 
-        // Choisir une histoire au hasard
-        const nombre =
+        const numero =
             Math.floor(Math.random() * histoires.length);
 
+
+        // Prend une histoire
+
         const histoire =
-            histoires[nombre];
+            histoires[numero];
 
 
-        // Afficher le texte
+        // Affiche l'histoire
+
         document.getElementById("histoire").textContent =
             histoire;
 
 
-        document.getElementById("etat").textContent =
-            "Lecture en cours 🔊";
+        // Arrête l'ancienne voix
+
+        speechSynthesis.cancel();
 
 
-        // Créer la voix
+        // Crée une voix
+
         const voix =
             new SpeechSynthesisUtterance(histoire);
 
@@ -422,32 +302,21 @@
 
         voix.rate = 0.9;
 
-        voix.pitch = 1;
 
+        // Commence la lecture
 
-        // Quand la lecture est terminée
-        voix.onend = function () {
-
-            document.getElementById("etat").textContent =
-                "Terminé ✓";
-
-        };
-
-
-        // Lancer la lecture
-        window.speechSynthesis.speak(voix);
+        speechSynthesis.speak(voix);
 
     }
 
 
-    function arreterAudio() {
 
-        window.speechSynthesis.cancel();
+    function arreter() {
 
-        document.getElementById("etat").textContent =
-            "Arrêté";
+        speechSynthesis.cancel();
 
     }
+
 
 </script>
 
