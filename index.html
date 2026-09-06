@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Bibliothèque Audio</title>
 
     <style>
@@ -17,15 +19,18 @@
 
         h1 {
             font-size: 45px;
+            margin-bottom: 10px;
         }
 
-        p {
+        .description {
             color: #bbbbbb;
+            font-size: 18px;
         }
 
         .bibliotheque {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
             gap: 40px;
             margin-top: 60px;
         }
@@ -35,12 +40,15 @@
             width: 180px;
             height: 260px;
             border-radius: 15px;
-            cursor: pointer;
+
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: 0.2s;
+
+            cursor: pointer;
+
+            transition: transform 0.2s;
         }
 
         .livre:hover {
@@ -52,8 +60,16 @@
         }
 
         #message {
-            margin-top: 50px;
+            max-width: 800px;
+            margin: 50px auto 0 auto;
+
             font-size: 20px;
+            line-height: 1.6;
+
+            background-color: #252832;
+            padding: 25px;
+
+            border-radius: 15px;
         }
     </style>
 </head>
@@ -62,62 +78,85 @@
 
     <h1>📚 Bibliothèque Audio</h1>
 
-    <p>Clique sur un livre pour écouter un audio aléatoire.</p>
+    <p class="description">
+        Clique sur un livre pour découvrir une petite histoire aléatoire.
+    </p>
+
 
     <div class="bibliotheque">
 
-        <div class="livre" onclick="lireAudio()">
+        <div class="livre" onclick="lireHistoire()">
             <div class="emoji">📕</div>
-            <h2>Livre 1</h2>
+            <h2>Livre rouge</h2>
         </div>
 
-        <div class="livre" onclick="lireAudio()">
+        <div class="livre" onclick="lireHistoire()">
             <div class="emoji">📗</div>
-            <h2>Livre 2</h2>
+            <h2>Livre vert</h2>
         </div>
 
-        <div class="livre" onclick="lireAudio()">
+        <div class="livre" onclick="lireHistoire()">
             <div class="emoji">📘</div>
-            <h2>Livre 3</h2>
+            <h2>Livre bleu</h2>
         </div>
 
     </div>
+
 
     <div id="message">
-        🔊 Aucun audio en cours
+        🔊 Clique sur un livre pour commencer...
     </div>
+
 
     <script>
 
-        const phrases = [
-    "Il était une fois un jeune garçon qui trouva un vieux livre dans le grenier de sa maison. Lorsqu'il l'ouvrit, les mots commencèrent à briller. Soudain, une petite voix lui murmura : bienvenue dans l'histoire.",
+        const histoires = [
 
-    "Par une nuit d'orage, un chat noir se promenait seul dans une rue déserte. Il aperçut une étrange lumière derrière une porte abandonnée. Curieux, il entra et découvrit une bibliothèque remplie de livres capables de parler.",
+            "Il était une fois un jeune garçon qui trouva un vieux livre dans le grenier de sa maison. Lorsqu'il l'ouvrit, les mots commencèrent à briller. Soudain, une petite voix lui murmura : bienvenue dans l'histoire.",
 
-    "Au fond d'une forêt immense se trouvait une maison que personne n'osait approcher. Un jour, une jeune aventurière décida d'y entrer. Sur une table, elle trouva un livre rouge. Dès qu'elle le toucha, la maison entière se mit à trembler.",
+            "Par une nuit d'orage, un chat noir se promenait seul dans une rue déserte. Il aperçut une étrange lumière derrière une vieille porte. Curieux, il entra et découvrit une immense bibliothèque remplie de livres capables de parler.",
 
-    "Un garçon se réveilla un matin et remarqua que tout le monde avait disparu. Les rues étaient vides, les voitures abandonnées et les magasins ouverts. Puis son téléphone sonna. Un message apparut : si tu veux retrouver les autres, trouve le livre bleu.",
+            "Au fond d'une forêt immense se trouvait une maison que personne n'osait approcher. Un jour, une jeune aventurière décida d'y entrer. Sur une table, elle trouva un livre rouge. Dès qu'elle le toucha, toute la maison se mit à trembler.",
 
-    "Un vieux marin racontait qu'un trésor était caché sur une île perdue. Personne ne le croyait. Pourtant, un jour, trois enfants trouvèrent une carte dans un livre ancien. Au centre de la carte était écrit : ne faites confiance à personne."
-];
+            "Un garçon se réveilla un matin et remarqua que tout le monde avait disparu. Les rues étaient vides et les voitures abandonnées. Soudain, son téléphone sonna. Un message apparut : si tu veux retrouver les autres, trouve le livre bleu.",
 
-        function lireAudio() {
+            "Un vieux marin racontait qu'un trésor était caché sur une île perdue. Personne ne le croyait. Pourtant, trois enfants découvrirent un jour une carte dissimulée dans un livre ancien. Au centre était écrit : ne faites confiance à personne."
 
-            const nombreAleatoire =
-                Math.floor(Math.random() * phrases.length);
+        ];
 
-            const phrase = phrases[nombreAleatoire];
 
+        function lireHistoire() {
+
+            // Choisir un nombre au hasard
+            const numero =
+                Math.floor(Math.random() * histoires.length);
+
+            // Choisir l'histoire correspondant à ce nombre
+            const histoire = histoires[numero];
+
+
+            // Afficher l'histoire sur le site
             document.getElementById("message").textContent =
-                "🔊 " + phrase;
+                "🔊 " + histoire;
 
-            speechSynthesis.cancel();
 
-            const voix = new SpeechSynthesisUtterance(phrase);
+            // Arrêter une histoire précédente si elle parle encore
+            window.speechSynthesis.cancel();
+
+
+            // Créer la voix
+            const voix =
+                new SpeechSynthesisUtterance(histoire);
 
             voix.lang = "fr-FR";
 
-            speechSynthesis.speak(voix);
+            voix.rate = 0.95;
+
+            voix.pitch = 1;
+
+
+            // Lire l'histoire
+            window.speechSynthesis.speak(voix);
         }
 
     </script>
